@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<style>
+  h2{
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    size: 200px;
+    text-align: center;
+  }
+
+  h1{
+    font-family:Arial, Helvetica, sans-serif;
+    text-align: center;
+  }
+</style>
+<body>
+  <div>
+    <h1>SAD HAPPY NEWS</h1>
+  </div>
+  <h2 id="display_01"></h2>
+
+  <canvas id="canvas" width="800" height="600"></canvas>
+  <script>
+
+    
+    let request = new XMLHttpRequest();
+    
+    const apiUrl = 'http://newsapi.org/v2/top-headlines?' +
+          'country=in&' +
+          'apiKey=09fc67fbe35347faab045224ae589dbb';
+
+
+    request.open('GET', apiUrl);
+    request.responseType = 'json';
+    request.send();
+
+    
+      let requestData = function(){
+
+      drawCircle();
+      circleHappy();
+      circleNew2();
+    }       
+   
+    let newsLine = document.getElementById('display_01');
+    
+     
+
+    let showNews = function(){
+    
+  let data = request.response;
+  let articles = data.articles;
+  console.log(data);
+  
+  console.log(articles);
+  let t1 = articles[1].title;
+  let randTitle = Math.floor(Math.random()*10)    
+articles.forEach(element => {
+  let newsPop = articles[randTitle]['title']
+  console.log(newsPop)
+  newsLine.textContent = newsPop
+});
+  
+};  
+  
+
+    request.onload = requestData;
+    request.onload = showNews;
+    
+    setInterval(requestData, 2000);
+    setInterval(showNews, 2000);
+    
+
+
+
+ 
+
+    
+
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+
+    // var duration = 1000;
+    // var step = 10;
+    // let opacity = 0;
+
+    var r = 100;
+    var dr = +5; 
+
+    var r2 = 50;
+
+    var t = "0.8";
+    var dt = "0.02";
+    
+    var min = 0;
+    var max = 255;
+
+    function random() {
+    const num = Math.floor(Math.random() * (max-min)) + min;
+    return num;
+    }
+    function drawCircle(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.beginPath();
+    ctx.arc(600, 200, 120, 0, Math.PI, (Math.random() >= 0.5));
+    ctx.fillStyle = "rgba(" + random() + ", " + random() + ", " + random() + ", " + t + " )"
+    ctx.fill();
+    ctx.closePath();
+    }
+
+      //
+    function circleHappy(){
+    ctx.beginPath();
+    ctx.arc(900, 600, 150, 0, Math.PI, (Math.random() >= 0.5));
+    ctx.strokeStyle = "rgba(" + random() + ", " + random() + ", " + random() + ", " + t + " )"
+    ctx.stroke();
+    ctx.lineWidth = 30;
+    ctx.closePath();
+    ctx.closePath();
+    }
+    function circleSad(){
+    ctx.beginPath();
+    ctx.arc(900, 500, 150, 0, Math.PI, (Math.random() >= 0.5));
+    ctx.strokeStyle = "rgba(" + random() + ", " + random() + ", " + random() + ", " + t + " )"
+    ctx.stroke();
+    ctx.lineWidth = 30;
+    ctx.closePath();
+    ctx.closePath();
+    }
+
+    function circleNew2(){
+    ctx.beginPath();
+    ctx.arc(1200, 200, 120, 0, Math.PI, (Math.random() >= 0.5));
+    ctx.fillStyle = "rgba(" + random() + ", " + random() + ", " + random() + ", " + t + " )"
+    ctx.fill();
+    ctx.closePath();
+    ctx.closePath();
+    }
+
+    function circleNew3(){
+    ctx.beginPath();
+    ctx.arc(900, 400, 70, 0, Math.PI*2, false);
+    ctx.fillStyle = "rgba(" + random() + ", " + random() + ", " + random() + ", " + t + " )"
+    ctx.fill();
+    ctx.closePath();
+    ctx.closePath();
+    }
+
+    // setInterval(circleNew4, 50);
+
+
+
+    // r += dr;
+    // t += dt;    
+
+
+
+
+
+
+    
+    
+
+
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+    // setInterval(drawCircle, 50);
+
+
+
+  </script>
+</body>
+</html>
